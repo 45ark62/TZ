@@ -1,10 +1,3 @@
-/**
- * This class is the main view for the application. It is specified in app.js as the
- * "mainView" property. That setting automatically applies the "viewport"
- * plugin causing this view to become the body element (i.e., the viewport).
- *
- * TODO - Replace this content of this view to suite the needs of your application.
- */
 Ext.define('TZ.view.main.Main', {
     extend: 'Ext.tab.Panel',
     xtype: 'app-main',
@@ -33,19 +26,24 @@ Ext.define('TZ.view.main.Main', {
         },
         title: {
             bind: {
-                text: '{name}'
+                text: 'var1'
             },
             flex: 0
         },
-        iconCls: 'fa-th-list'
+        iconCls: 'fa-spinner',
+        style:{
+            backgroundColor: '#333',
+        },
+        
     },
 
     tabBar: {
-        flex: 1,
         layout: {
             align: 'stretch',
             overflowHandler: 'none'
-        }
+        },
+       
+        
     },
 
     responsiveConfig: {
@@ -53,12 +51,12 @@ Ext.define('TZ.view.main.Main', {
             headerPosition: 'top'
         },
         wide: {
-            headerPosition: 'left'
+            headerPosition: 'top'
         }
     },
 
     defaults: {
-        bodyPadding: 20,
+        bodyPadding: 60,
         tabConfig: {
             plugins: 'responsive',
             responsiveConfig: {
@@ -69,36 +67,26 @@ Ext.define('TZ.view.main.Main', {
                 tall: {
                     iconAlign: 'top',
                     textAlign: 'center',
-                    width: 120
+                    width: 100
                 }
             }
         }
     },
 
     items: [{
-        title: 'Home',
-        iconCls: 'fa-home',
-        // The following grid shares a store with the classic version's grid as well!
+        title: 'Товары',
+        iconCls: 'x-fa fa-shopping-cart', 
+        style:{
+            color: 'white', 
+            padding: '10px 20px'
+        },
+       
+        
         items: [{
             xtype: 'mainlist'
         }]
-    }, {
-        title: 'Users',
-        iconCls: 'fa-user',
-        bind: {
-            html: '{loremIpsum}'
-        }
-    }, {
-        title: 'Groups',
-        iconCls: 'fa-users',
-        bind: {
-            html: '{loremIpsum}'
-        }
-    }, {
-        title: 'Settings',
-        iconCls: 'fa-cog',
-        bind: {
-            html: '{loremIpsum}'
-        }
+    },
+    ],buttons:[{
+        title:'Выход',
     }]
 });

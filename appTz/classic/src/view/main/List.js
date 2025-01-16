@@ -6,19 +6,21 @@ Ext.define('TZ.view.main.List', {
     xtype: 'mainlist',
 
     requires: [
-        'TZ.store.Personnel'
+        'TZ.store.Goods'
     ],
 
-    title: 'Personnel',
+    title: 'Список товаров',
 
     store: {
-        type: 'personnel'
+        type: 'goods'
     },
 
     columns: [
-        { text: 'Name',  dataIndex: 'name' },
-        { text: 'Email', dataIndex: 'email', flex: 1 },
-        { text: 'Phone', dataIndex: 'phone', flex: 1 }
+        { text: 'ID',  dataIndex: 'id' },
+        { text: 'Имя', dataIndex: 'name', flex: 1 },
+        { text: 'Описание', dataIndex: 'description', flex: 1 },
+        { text: 'Цена', dataIndex: 'price', flex: 1 },
+        { text: 'Кол-во', dataIndex: 'quantity', flex: 1 },
     ],
 
     listeners: {
