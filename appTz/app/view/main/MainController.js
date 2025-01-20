@@ -9,9 +9,11 @@ Ext.define('TZ.view.main.MainController', {
 
     alias: 'controller.main',
 
-    onItemClick: function (record) {
-        var name=record.get('name')
-        console.log(name)
+    onItemClick: function (grid, td, cellIndex, record) {
+        const column = grid.getColumns()[cellIndex];
+        if (column.dataIndex === "name") {
+            Ext.Msg.alert( `Вы выбрали цену: ${record.get("name")}`);
+        }
     },
 
     onConfirm: function (choice) {
