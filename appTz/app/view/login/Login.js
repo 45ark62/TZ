@@ -9,7 +9,7 @@ Ext.define('TZ.view.login.Login', {
 
     controller: 'login',
     bodyPadding: 10,
-    title: 'Окно авторизации',
+    title: 'Авторизация',
     closable: false,
     autoShow: true,
     modal: true,  
@@ -41,9 +41,7 @@ Ext.define('TZ.view.login.Login', {
             listeners: {
                 click: 'onLoginClick'
             },
-            style:{
-
-            }
+            
         }]
     }
 });

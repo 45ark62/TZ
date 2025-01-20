@@ -1,7 +1,7 @@
 Ext.define('TZ.view.main.Main', {
     extend: 'Ext.tab.Panel',
     xtype: 'app-main',
-
+    plugins: 'viewport',
     requires: [
         'Ext.plugin.Viewport',
         'Ext.window.MessageBox',
@@ -19,21 +19,29 @@ Ext.define('TZ.view.main.Main', {
     tabBarHeaderPosition: 1,
     titleRotation: 0,
     tabRotation: 0,
-
     header: {
         layout: {
-            align: 'stretchmax'
+            
+            type: 'hbox', 
+            align: 'stretch',  
+            pack: 'start',
         },
-        title: {
-            bind: {
-                text: 'var1'
+        items: [
+            {
+                xtype: 'button',
+                text: 'Товары',
+                iconCls: 'x-fa fa-shopping-cart',
+                handler: 'onShowProducts',
+         
             },
-            flex: 0
-        },
-        iconCls: 'fa-spinner',
-        style:{
-            backgroundColor: '#333',
-        },
+            {
+                xtype: 'button',
+                text: 'Выход',
+                iconCls: 'x-fa fa-sign-out',
+                handler: 'logout'
+            }
+        ]
+        
         
     },
 
@@ -42,8 +50,9 @@ Ext.define('TZ.view.main.Main', {
             align: 'stretch',
             overflowHandler: 'none'
         },
-       
-        
+        style: {
+        'padding-right': '20px'
+    }
     },
 
     responsiveConfig: {
@@ -56,7 +65,8 @@ Ext.define('TZ.view.main.Main', {
     },
 
     defaults: {
-        bodyPadding: 60,
+        bodyPadding: 100,
+      
         tabConfig: {
             plugins: 'responsive',
             responsiveConfig: {
@@ -73,20 +83,5 @@ Ext.define('TZ.view.main.Main', {
         }
     },
 
-    items: [{
-        title: 'Товары',
-        iconCls: 'x-fa fa-shopping-cart', 
-        style:{
-            color: 'white', 
-            padding: '10px 20px'
-        },
-       
-        
-        items: [{
-            xtype: 'mainlist'
-        }]
-    },
-    ],buttons:[{
-        title:'Выход',
-    }]
+    
 });

@@ -8,7 +8,7 @@ Ext.application({
         'TZ.view.login.Login'
     ],
 
-  //  mainView: 'TZ.view.login.Login'
+ 
 	
    
 });

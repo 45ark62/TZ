@@ -9,13 +9,43 @@ Ext.define('TZ.view.main.MainController', {
 
     alias: 'controller.main',
 
-    onItemSelected: function (sender, record) {
-        Ext.Msg.confirm('Confirm', 'Are you sure?', 'onConfirm', this);
+    onItemClick: function (record) {
+        var name=record.get('name')
+        console.log(name)
     },
 
     onConfirm: function (choice) {
         if (choice === 'yes') {
-            //
         }
-    }
+    },
+    logout: function () {
+        
+        localStorage.removeItem('TutorialLoggedIn');
+
+       
+        this.getView().destroy();
+
+        
+        Ext.create({
+            xtype: 'login'
+        });
+    },
+    onShowProducts: function() {
+        var mainTabPanel = this.getView(); 
+        
+       
+        var existingTab = mainTabPanel.child('tabpanel[xtype=mainlist]');
+        
+        if (!existingTab) {
+           
+            mainTabPanel.add({
+                xtype: 'mainlist',  
+                title: 'Товары',  
+                iconCls: 'x-fa fa-shopping-cart',
+                closable: true,
+            });
+        }
+    
+        
+    },
 });

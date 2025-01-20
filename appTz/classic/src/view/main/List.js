@@ -1,29 +1,89 @@
-/**
- * This view is an example list of people.
- */
-Ext.define('TZ.view.main.List', {
-    extend: 'Ext.grid.Panel',
-    xtype: 'mainlist',
+Ext.define("TZ.view.main.List", {
+    extend: "Ext.grid.Panel",
+    xtype: "mainlist",
 
-    requires: [
-        'TZ.store.Goods'
-    ],
+    requires: ["TZ.store.Goods"],
 
-    title: 'Список товаров',
+    title: "Список товаров",
 
     store: {
-        type: 'goods'
+        type: "goods",
     },
 
     columns: [
-        { text: 'ID',  dataIndex: 'id' },
-        { text: 'Имя', dataIndex: 'name', flex: 1 },
-        { text: 'Описание', dataIndex: 'description', flex: 1 },
-        { text: 'Цена', dataIndex: 'price', flex: 1 },
-        { text: 'Кол-во', dataIndex: 'quantity', flex: 1 },
+        { text: "ID", dataIndex: "id" },
+        { text: "Имя", dataIndex: "name", flex: 1 },
+        { text: "Описание", dataIndex: "description", flex: 1 },
+        { text: "Цена", dataIndex: "price", flex: 1 },
+        { text: "Кол-во", dataIndex: "quantity", flex: 1, tdCls: "x-change-cell" },
     ],
+    
+    viewConfig: {
+        getRowClass: function (record, index) {
+            var c = record.get("quantity");
+            console.log(c);
+            if (c === 0) {
+                return "price-fall";
+            }
+        },
+    },
 
     listeners: {
-        select: 'onItemSelected'
+        select: "onItemClick",
+    },
+
+
+    dockedItems: [
+        {
+            xtype: 'toolbar',
+            dock: 'top',
+            items: [
+                {
+                    xtype: 'textfield',
+                    fieldLabel: 'ID товара',
+                    itemId: 'filterIdField',
+                    listeners: {
+                        specialkey: function(field, e) {
+                            if (e.getKey() === Ext.EventObject.ENTER) {
+                                this.up('grid').applyFilters();  
+                            }
+                        }
+                    }
+                },
+                {
+                    xtype: 'textfield',
+                    fieldLabel: 'Описание товара',
+                    itemId: 'filterDescriptionField',
+                    listeners: {
+                        specialkey: function(field, e) {
+                            if (e.getKey() === Ext.EventObject.ENTER) {
+                                this.up('grid').applyFilters();  
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+
+    applyFilters: function() {
+        var grid = this,
+            store = grid.getStore(),
+            idFilter = grid.down('#filterIdField').getValue(),
+            descriptionFilter = grid.down('#filterDescriptionField').getValue();
+
+        store.clearFilter();
+
+        if (idFilter) {
+            store.filter('id', idFilter);  // Точное совпадение по ID
+        }
+        if (descriptionFilter) {
+            store.filter({
+                property: 'description',
+                value: descriptionFilter,
+                anyMatch: true,  // Вхождение строки в описание
+                caseSensitive: false
+            });
+        }
     }
 });
