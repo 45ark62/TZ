@@ -5431,3 +5431,7 @@ div.x-border-layout-ct {
     top: 30px;
     right: -24px;
 }
+/* http://localhost:1841/classic/sass/src/view/main/Main.scss:84 */
+.price-fall {
+    background-color: rgba(239, 0, 0, 0.707);
+}

@@ -3,10 +3,6 @@ Ext.define('TZ.Application', {
     extend: 'Ext.app.Application',
     
     name: 'TZ',
-
-    stores: [
-        // TODO: add global / shared stores here
-    ],
     
     launch: function () {
         var loggedIn;

@@ -15,18 +15,16 @@ Ext.define("TZ.view.main.List", {
         { text: "Имя", dataIndex: "name", flex: 1 },
         { text: "Описание", dataIndex: "description", flex: 1 },
         { text: "Цена", dataIndex: "price", flex: 1 },
-        { text: "Кол-во", dataIndex: "quantity", flex: 1, tdCls: "x-change-cell" },
+        { text: "Кол-во", dataIndex: "quantity", flex: 1, renderer: function(value, metaData) {
+            if (value === 0) {
+                metaData.tdCls = 'price-fall'; 
+            }
+            return value; 
+        
+    } }
     ],
     
-    viewConfig: {
-        getRowClass: function (record, index) {
-            var c = record.get("quantity");
-            console.log(c);
-            if (c === 0) {
-                return "price-fall";
-            }
-        },
-    },
+    
 
     listeners: {
         select: "onItemClick",
